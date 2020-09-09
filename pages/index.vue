@@ -1,10 +1,17 @@
 <template>
-  <div class="container"></div>
+  <div class=""><Header /> <Hero /> <Feed /></div>
 </template>
 
 <script lang="ts">
 import Vue from 'vue';
-export default Vue.extend({});
+import Header from '~/components/Header.vue';
+import Hero from '~/components/Hero.vue';
+export default Vue.extend({
+  components: {
+    Header,
+    Hero,
+  },
+});
 </script>
 
 <style>
