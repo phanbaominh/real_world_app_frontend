@@ -49,6 +49,7 @@ export default {
     '@nuxtjs/stylelint-module',
     // Doc: https://github.com/nuxt-community/nuxt-tailwindcss
     '@nuxtjs/tailwindcss',
+    '@nuxtjs/fontawesome',
   ],
   /*
    ** Nuxt.js modules
@@ -66,6 +67,11 @@ export default {
    ** Build configuration
    ** See https://nuxtjs.org/api/configuration-build/
    */
+  fontawesome: {
+    icons: {
+      solid: ['faHeart'],
+    },
+  },
   build: {},
   server: {
     port: 8000,

@@ -1,17 +1,10 @@
 <template>
-  <div class=""><Header /> <Hero /> <Feed /></div>
+  <div class=""><HomepageHero /> <HomepageMain /></div>
 </template>
 
 <script lang="ts">
 import Vue from 'vue';
-import Header from '~/components/Header.vue';
-import Hero from '~/components/Hero.vue';
-export default Vue.extend({
-  components: {
-    Header,
-    Hero,
-  },
-});
+export default Vue.extend({});
 </script>
 
 <style>

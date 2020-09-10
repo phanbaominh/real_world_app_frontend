@@ -5,8 +5,17 @@
  ** Default: https://github.com/tailwindcss/tailwindcss/blob/master/stubs/defaultConfig.stub.js
  */
 module.exports = {
-  theme: {},
-  variants: {},
+  theme: {
+    extend: {
+      colors: {
+        'gray-tag-list': '#f3f3f3',
+        'gray-tag': '#818a91',
+      },
+    },
+  },
+  variants: {
+    margin: ({ after }) => after(['first']),
+  },
   plugins: [],
   future: {
     removeDeprecatedGapUtilities: true,

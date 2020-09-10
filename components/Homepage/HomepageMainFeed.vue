@@ -1,13 +1,17 @@
 <template>
-  <section class="max-w-screen-xl mx-auto">
-    <header><FeedTab>Global Feed</FeedTab></header>
+  <section>
+    <header>
+      <div><HomepageMainFeedTab>Global Feed</HomepageMainFeedTab></div>
+      <div class="border-b border-gray-400 mt-4"></div>
+    </header>
     <p v-if="$fetchState.pending">Fetching articles...</p>
     <p v-else-if="$fetchState.error">Error fetching!</p>
-    <section v-else>
-      <FeedArticle
+    <section v-else class="mt-4">
+      <HomepageMainFeedArticle
         v-for="article in articles"
         :key="article.slug"
         :article="article"
+        class="mt-4"
       />
     </section>
   </section>
