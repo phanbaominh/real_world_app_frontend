@@ -1,13 +1,21 @@
 <template>
   <span
-    ><button @click="filterFeedByTag"><slot></slot></button
-  ></span>
+    ><button @click="filterFeedByTag">{{ tagName }}</button></span
+  >
 </template>
 <script lang="ts">
-import Vue from 'vue';
+import Vue, { PropOptions } from 'vue';
 export default Vue.extend({
+  props: {
+    tagName: {
+      required: true,
+      type: String,
+    } as PropOptions<string>,
+  },
   methods: {
-    filterFeedByTag() {},
+    filterFeedByTag() {
+      this.$accessor.setSelectedTag(this.tagName);
+    },
   },
 });
 </script>

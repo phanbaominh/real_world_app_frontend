@@ -36,7 +36,8 @@
 <script lang="ts">
 import Vue, { PropOptions } from 'vue';
 import moment from 'moment';
-import { Article } from './HomepageMainFeed.vue';
+import { Article } from '~/constants/api';
+
 export default Vue.extend({
   props: {
     article: {

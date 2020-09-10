@@ -9,9 +9,7 @@
         :key="tag"
         class="bg-gray-tag text-white rounded-full text-lg px-3 pb-1 mr-2 mb-2 hover:bg-gray-700"
       >
-        <TagItem>
-          {{ tag }}
-        </TagItem>
+        <TagItem :tag-name="tag" />
       </li>
     </ul>
   </aside>
@@ -19,8 +17,6 @@
 <script lang="ts">
 import Vue from 'vue';
 import TagItem from './HomepageMainTagListItem.vue';
-
-export type Tag = string;
 export default Vue.extend({
   components: {
     TagItem,
@@ -30,7 +26,7 @@ export default Vue.extend({
   },
   data() {
     return {
-      tags: [] as Tag[],
+      tags: [] as string[],
     };
   },
 });
