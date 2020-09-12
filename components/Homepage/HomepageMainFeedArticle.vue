@@ -30,7 +30,7 @@
       {{ article.description }}
     </p>
     <a href="#" class="text-gray-500 opacity-75">Read more...</a>
-    <div class="border-b border-gray-400 mt-8"></div>
+    <div v-if="hasDivider" class="border-b border-gray-400 mt-8"></div>
   </article>
 </template>
 <script lang="ts">
@@ -44,6 +44,10 @@ export default Vue.extend({
       required: true,
       type: Object,
     } as PropOptions<Article>,
+    hasDivider: {
+      default: true,
+      type: Boolean,
+    } as PropOptions<boolean>,
   },
 
   computed: {

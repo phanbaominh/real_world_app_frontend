@@ -4,12 +4,17 @@
     <BaseFetcher :fetch-state="$fetchState">
       <template #pending>Fetching articles...</template>
       <section class="mt-4">
-        <HomepageMainFeedArticle
-          v-for="article in articles"
-          :key="article.slug"
-          :article="article"
-          class="mt-4"
-        />
+        <BasePagination v-slot="slotProps" :items="articles">
+          <div class="mb-12">
+            <HomepageMainFeedArticle
+              v-for="(article, index) in slotProps.items"
+              :key="article.slug"
+              :article="article"
+              :has-divider="index === slotProps.items.length - 1 ? false : true"
+              class="mt-4"
+            />
+          </div>
+        </BasePagination>
       </section>
     </BaseFetcher>
   </section>
