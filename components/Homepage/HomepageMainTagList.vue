@@ -1,17 +1,18 @@
 <template>
   <aside>
     <h2 class="block mb-2 text-xl">Popular Tags</h2>
-    <p v-if="$fetchState.pending">Loading tags</p>
-    <p v-else-if="$fetchState.error">Error loading tags</p>
-    <ul v-else class="flex flex-wrap">
-      <li
-        v-for="tag in tags"
-        :key="tag"
-        class="bg-gray-tag text-white rounded-full text-lg px-3 pb-1 mr-2 mb-2 hover:bg-gray-700"
-      >
-        <TagItem :tag-name="tag" />
-      </li>
-    </ul>
+    <BaseFetcher :fetch-state="$fetchState">
+      <template #pending>Loading tags</template>
+      <ul class="flex flex-wrap">
+        <li
+          v-for="tag in tags"
+          :key="tag"
+          class="bg-gray-tag text-white rounded-full text-lg px-3 pb-1 mr-2 mb-2 hover:bg-gray-700"
+        >
+          <TagItem :tag-name="tag" />
+        </li>
+      </ul>
+    </BaseFetcher>
   </aside>
 </template>
 <script lang="ts">

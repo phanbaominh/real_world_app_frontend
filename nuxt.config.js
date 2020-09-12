@@ -77,4 +77,8 @@ export default {
   server: {
     port: 8000,
   },
+  loading: {
+    color: 'green',
+    height: '0px',
+  },
 };

@@ -1,0 +1,26 @@
+<template>
+  <div>
+    <p v-if="fetchState.pending">
+      <slot name="pending"></slot>
+      <LoadingSpinner />
+    </p>
+    <slot v-else-if="fetchState.error" name="error">Error fetching!</slot>
+    <slot v-else></slot>
+  </div>
+</template>
+<script lang="ts">
+import Vue, { PropOptions } from 'vue';
+interface fetchState {
+  error: Error | null;
+  pending: boolean;
+  timestamp: number;
+}
+export default Vue.extend({
+  props: {
+    fetchState: {
+      required: true,
+      type: Object,
+    } as PropOptions<fetchState>,
+  },
+});
+</script>

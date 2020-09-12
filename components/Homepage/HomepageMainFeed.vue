@@ -1,16 +1,17 @@
 <template>
   <section>
     <HompageMainFeedHeader @switch-feed="onSwitchFeed" />
-    <p v-if="$fetchState.pending">Fetching articles...</p>
-    <p v-else-if="$fetchState.error">Error fetching!</p>
-    <section v-else class="mt-4">
-      <HomepageMainFeedArticle
-        v-for="article in articles"
-        :key="article.slug"
-        :article="article"
-        class="mt-4"
-      />
-    </section>
+    <BaseFetcher :fetch-state="$fetchState">
+      <template #pending>Fetching articles...</template>
+      <section class="mt-4">
+        <HomepageMainFeedArticle
+          v-for="article in articles"
+          :key="article.slug"
+          :article="article"
+          class="mt-4"
+        />
+      </section>
+    </BaseFetcher>
   </section>
 </template>
 <script lang="ts">
