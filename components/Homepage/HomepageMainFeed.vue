@@ -1,6 +1,6 @@
 <template>
   <section>
-    <HompageMainFeedHeader @switch-feed="onSwitchFeed" />
+    <HomepageMainFeedHeader @switch-feed="onSwitchFeed" />
     <BaseFetcher :fetch-state="$fetchState">
       <template #pending>Fetching articles...</template>
       <section class="mt-4">
@@ -34,8 +34,13 @@ export default Vue.extend({
   },
   methods: {
     onSwitchFeed(tagQuery: string) {
-      this.tagQuery = tagQuery;
-      this.$fetch();
+      if (
+        this.tagQuery !== tagQuery ||
+        this.$fetchState.timestamp <= Date.now() - 30000
+      ) {
+        this.tagQuery = tagQuery;
+        this.$fetch();
+      }
     },
   },
 });

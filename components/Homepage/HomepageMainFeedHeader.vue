@@ -1,6 +1,6 @@
 <template>
   <header>
-    <div class="flex">
+    <div class="flex border-b border-gray-400">
       <HomepageMainFeedTab :class="{ active: isGlobalTabActive }"
         >Global Feed</HomepageMainFeedTab
       ><HomepageMainFeedTab
@@ -10,7 +10,6 @@
         {{ selectedTag }}
       </HomepageMainFeedTab>
     </div>
-    <div class="border-b border-gray-400 mt-4"></div>
   </header>
 </template>
 <script lang="ts">
@@ -19,6 +18,7 @@ export default Vue.extend({
   data() {
     return {
       isGlobalTabActive: true,
+      currentTab: 'Global Feed',
     };
   },
   computed: {
@@ -28,26 +28,34 @@ export default Vue.extend({
   },
   watch: {
     selectedTag(newSelectedTag) {
-      if (newSelectedTag) this.isGlobalTabActive = false;
-    },
-    isGlobalTabActive(newValue) {
-      newValue
-        ? this.$emit('switch-feed', '')
-        : this.$emit('switch-feed', `tag=${this.selectedTag}`);
+      if (newSelectedTag) {
+        this.isGlobalTabActive = false;
+        this.currentTab = newSelectedTag;
+        this.switchFeed();
+      }
     },
   },
-  mounted() {
+  created() {
     this.$on('switch-tab', this.onSwitchTab);
   },
   methods: {
-    onSwitchTab() {
-      this.isGlobalTabActive = !this.isGlobalTabActive;
+    onSwitchTab(newTab: string) {
+      if (newTab !== this.currentTab) {
+        this.isGlobalTabActive = !this.isGlobalTabActive;
+        this.currentTab = newTab;
+      }
+      this.switchFeed();
+    },
+    switchFeed() {
+      this.isGlobalTabActive
+        ? this.$emit('switch-feed', '')
+        : this.$emit('switch-feed', `tag=${this.selectedTag}`);
     },
   },
 });
 </script>
 <style scoped>
 .active {
-  @apply text-green-500 border-b border-green-500;
+  @apply text-green-500 border-b-2 border-green-500;
 }
 </style>
