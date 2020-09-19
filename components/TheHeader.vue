@@ -5,7 +5,10 @@
     </div>
     <nav class="text-xl flex-grow flex justify-center">
       <HeaderButton link="/">Home</HeaderButton>
-      <HeaderButton v-if="!$auth.user" link="/login">Sign in</HeaderButton>
+      <template v-if="!$auth.user">
+        <HeaderButton link="/login">Sign in</HeaderButton>
+        <HeaderButton link="/signup">Sign up</HeaderButton>
+      </template>
       <template v-else>
         <button @click="logOut">Sign out</button>
         <HeaderButton link="#">{{ $auth.user.username }}</HeaderButton>
@@ -15,7 +18,7 @@
 </template>
 <script lang="ts">
 import Vue from 'vue';
-import HeaderButton from './HeaderButton.vue';
+import HeaderButton from './TheHeaderButton.vue';
 export default Vue.extend({
   components: {
     HeaderButton,

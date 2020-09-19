@@ -1,7 +1,8 @@
 <template>
   <nuxt-link
-    class="inline-block ml-2 text-gray-500 hover:text-black cursor-pointer"
+    class="inline-block ml-2 text-gray-500 hover:text-gray-700 cursor-pointer"
     :to="link"
+    :class="{ active: $route.path === link }"
   >
     <slot></slot>
   </nuxt-link>
@@ -17,3 +18,11 @@ export default Vue.extend({
   },
 });
 </script>
+<style scoped>
+.active {
+  @apply text-gray-700;
+}
+.active:hover {
+  @apply text-black;
+}
+</style>

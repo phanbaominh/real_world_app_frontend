@@ -1,17 +1,29 @@
 <template>
-  <form
-    method="POST"
-    :action="`${$config.apiURL}/api/users/login`"
-    @submit="onSignIn"
-  >
-    <AuthBaseFormInput v-model="user.email" placeholder="Email" name="email" />
-    <AuthBaseFormInput
-      v-model="user.password"
-      placeholder="Password"
-      name="password"
-    />
-    <button type="submit">Sign in</button>
-  </form>
+  <section class="flex items-center flex-col">
+    <h1 class="text-5xl">Sign in</h1>
+    <form
+      method="POST"
+      :action="`${$config.apiURL}/api/users/login`"
+      class="signin-form text-2xl mt-2 flex-col flex w-1/4"
+      @submit="onSignIn"
+    >
+      <AuthBaseFormInput
+        :id="'email-input'"
+        v-model="user.email"
+        placeholder="Email"
+        name="email"
+      />
+      <AuthBaseFormInput
+        :id="'password-input'"
+        v-model="user.password"
+        placeholder="Password"
+        name="password"
+      />
+      <BaseButton type="submit" :o-class="'px-4 self-end'">
+        Sign in
+      </BaseButton>
+    </form>
+  </section>
 </template>
 <script lang="ts">
 import Vue from 'vue';
@@ -34,3 +46,8 @@ export default Vue.extend({
   },
 });
 </script>
+<style scoped>
+.signin-form > * {
+  @apply mt-4;
+}
+</style>
