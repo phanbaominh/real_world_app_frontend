@@ -58,6 +58,7 @@ export default {
   modules: [
     // Doc: https://axios.nuxtjs.org/usage
     '@nuxtjs/axios',
+    '@nuxtjs/auth',
   ],
   /*
    ** Axios module configuration
@@ -80,5 +81,31 @@ export default {
   loading: {
     color: 'green',
     height: '0px',
+  },
+  publicRuntimeConfig: {
+    apiURL: process.env.API_URL, // || 'http://localhost:3000',
+  },
+  auth: {
+    strategies: {
+      local: {
+        endpoints: {
+          login: {
+            url: `${process.env.API_URL}/api/users/login`,
+            method: 'post',
+            propertyName: 'user.token',
+          },
+          logout: false,
+          user: {
+            url: `${process.env.API_URL}/api/user`,
+            method: 'get',
+            propertyName: 'user',
+          },
+        },
+        // tokenRequired: true,
+        // tokenType: 'bearer',
+        globalToken: false,
+        // autoFetchUser: true
+      },
+    },
   },
 };

@@ -27,7 +27,7 @@ export default Vue.extend({
   async fetch() {
     this.articles = (
       await this.$axios.$get(
-        `http://localhost:3000/api/articles?${this.tagQuery}`
+        `${this.$config.apiURL}/api/articles?${this.tagQuery}`
       )
     ).articles;
   },

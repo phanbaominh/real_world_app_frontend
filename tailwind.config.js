@@ -10,6 +10,7 @@ module.exports = {
       colors: {
         'gray-tag-list': '#f3f3f3',
         'gray-tag': '#818a91',
+        'conduit-green': '#5CB85C',
       },
     },
   },

@@ -23,7 +23,9 @@ export default Vue.extend({
     TagItem,
   },
   async fetch() {
-    this.tags = (await this.$axios.$get('http://localhost:3000/api/tags')).tags;
+    this.tags = (
+      await this.$axios.$get(`${this.$config.apiURL}/api/tags`)
+    ).tags;
   },
   data() {
     return {
