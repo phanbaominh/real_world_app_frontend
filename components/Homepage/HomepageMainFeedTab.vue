@@ -4,11 +4,17 @@
   </div>
 </template>
 <script lang="ts">
-import Vue from 'vue';
+import Vue, { PropOptions } from 'vue';
 export default Vue.extend({
+  props: {
+    tabNumber: {
+      required: true,
+      type: Number,
+    } as PropOptions<number>,
+  },
   methods: {
     onSelectedTab() {
-      this.$parent.$emit('switch-tab', (this.$el.textContent || '').trim());
+      this.$parent.$emit('switch-tab', this.tabNumber);
     },
   },
 });

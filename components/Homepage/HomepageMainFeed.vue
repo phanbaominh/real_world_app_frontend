@@ -6,13 +6,7 @@
       <section class="mt-4">
         <BasePagination v-slot="slotProps" :items="articles">
           <div class="mb-12">
-            <HomepageMainFeedArticle
-              v-for="(article, index) in slotProps.items"
-              :key="article.slug"
-              :article="article"
-              :has-divider="index === slotProps.items.length - 1 ? false : true"
-              class="mt-4"
-            />
+            <HomepageMainFeedArticles :articles="slotProps.items" />
           </div>
         </BasePagination>
       </section>
@@ -26,24 +20,25 @@ import { Article } from '~/constants/api';
 export default Vue.extend({
   async fetch() {
     this.articles = (
-      await this.$axios.$get(
-        `${this.$config.apiURL}/api/articles?${this.tagQuery}`
-      )
+      await this.$axios.$get(`${this.$config.apiURL}/${this.articlesQuery}`)
     ).articles;
   },
   data() {
     return {
       articles: [] as Article[],
-      tagQuery: '',
+      articlesQuery: '',
     };
   },
+  created() {
+    this.articlesQuery = this.$auth.user ? 'api/articles/feed' : 'api/articles';
+  },
   methods: {
-    onSwitchFeed(tagQuery: string) {
+    onSwitchFeed(articlesQuery: string) {
       if (
-        this.tagQuery !== tagQuery ||
+        this.articlesQuery !== articlesQuery ||
         this.$fetchState.timestamp <= Date.now() - 30000
       ) {
-        this.tagQuery = tagQuery;
+        this.articlesQuery = articlesQuery;
         this.$fetch();
       }
     },

@@ -35,7 +35,7 @@
 </template>
 <script lang="ts">
 import Vue, { PropOptions } from 'vue';
-import moment from 'moment';
+import dayjs from 'dayjs';
 import { Article } from '~/constants/api';
 
 export default Vue.extend({
@@ -52,7 +52,7 @@ export default Vue.extend({
 
   computed: {
     formattedDate(): string {
-      return moment(this.article.createdAt).format('MMMM D, Y');
+      return dayjs(this.article.createdAt).format('MMMM D, YYYY');
     },
   },
 });

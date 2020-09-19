@@ -1,11 +1,18 @@
 <template>
   <header>
     <div class="flex border-b border-gray-400">
-      <HomepageMainFeedTab :class="{ active: isGlobalTabActive }"
+      <HomepageMainFeedTab
+        v-if="$auth.user"
+        :class="{ active: currentTab === 2 }"
+        :tab-number="2"
+        >Your Feed</HomepageMainFeedTab
+      >
+      <HomepageMainFeedTab :class="{ active: currentTab === 0 }" :tab-number="0"
         >Global Feed</HomepageMainFeedTab
       ><HomepageMainFeedTab
         v-if="selectedTag"
-        :class="{ active: !isGlobalTabActive }"
+        :class="{ active: currentTab === 1 }"
+        :tab-number="1"
       >
         {{ selectedTag }}
       </HomepageMainFeedTab>
@@ -17,8 +24,7 @@ import Vue from 'vue';
 export default Vue.extend({
   data() {
     return {
-      isGlobalTabActive: true,
-      currentTab: 'Global Feed',
+      currentTab: 0,
     };
   },
   computed: {
@@ -29,27 +35,35 @@ export default Vue.extend({
   watch: {
     selectedTag(newSelectedTag) {
       if (newSelectedTag) {
-        this.isGlobalTabActive = false;
-        this.currentTab = newSelectedTag;
-        this.switchFeed();
+        this.currentTab !== 1 ? (this.currentTab = 1) : this.switchFeed();
       }
     },
-  },
-  created() {
-    this.$on('switch-tab', this.onSwitchTab);
-  },
-  methods: {
-    onSwitchTab(newTab: string) {
-      if (newTab !== this.currentTab) {
-        this.isGlobalTabActive = !this.isGlobalTabActive;
-        this.currentTab = newTab;
-      }
+    currentTab() {
       this.switchFeed();
     },
+  },
+  mounted() {
+    this.$on('switch-tab', this.onSwitchTab);
+    if (this.$auth.user) this.currentTab = 2;
+  },
+  methods: {
+    onSwitchTab(newTab: number) {
+      if (newTab !== this.currentTab) {
+        this.currentTab = newTab;
+      } else this.switchFeed();
+    },
     switchFeed() {
-      this.isGlobalTabActive
-        ? this.$emit('switch-feed', '')
-        : this.$emit('switch-feed', `tag=${this.selectedTag}`);
+      switch (this.currentTab) {
+        case 2:
+          this.$emit('switch-feed', 'api/articles/feed');
+          break;
+        case 0:
+          this.$emit('switch-feed', 'api/articles');
+          break;
+        default:
+          this.$emit('switch-feed', `api/articles?tag=${this.selectedTag}`);
+          break;
+      }
     },
   },
 });

@@ -1,12 +1,11 @@
-// import { Plugin } from '@nuxt/types';
+import { Plugin } from '@nuxt/types';
 
-// const axiosPlugin: Plugin = ({ store, $axios }) => {
-//   $axios.onRequest((config) => {
-//     console.log('store', store.state);
-//     if (store.state.user) {
-//       config.headers.Authorization = `Token ${store.state.user.token}`;
-//     }
-//   });
-// };
+const axiosPlugin: Plugin = ({ $axios, store }) => {
+  $axios.onRequest((config) => {
+    if (store.state.auth && store.state.auth.user) {
+      config.headers.Authorization = `Bearer ${store.state.auth.user.token}`;
+    }
+  });
+};
 
-// export default axiosPlugin;
+export default axiosPlugin;
