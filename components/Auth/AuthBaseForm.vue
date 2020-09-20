@@ -1,0 +1,44 @@
+<template>
+  <section class="flex items-center flex-col">
+    <h1 class="text-5xl"><slot name="heading"></slot></h1>
+    <div v-if="error">
+      <ul class="text-xl text-red-700">
+        <li v-for="(value, key) in error" :key="key">
+          {{ key }} {{ value.join('and') }}
+        </li>
+      </ul>
+    </div>
+    <form
+      method="POST"
+      class="auth-form text-2xl mt-2 flex-col flex w-1/4"
+      @submit="onSubmit"
+    >
+      <slot></slot>
+    </form>
+  </section>
+</template>
+<script lang="ts">
+import Vue from 'vue';
+export default Vue.extend({
+  props: {
+    // eslint-disable-next-line vue/require-default-prop
+    error: {
+      type: Object,
+    },
+  },
+  methods: {
+    onSubmit(e: Event) {
+      e.preventDefault();
+      this.$emit('submit');
+    },
+  },
+});
+</script>
+<style scoped>
+.auth-form > * {
+  @apply mt-4;
+}
+ul {
+  list-style-type: circle;
+}
+</style>
