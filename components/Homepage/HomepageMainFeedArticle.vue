@@ -1,21 +1,7 @@
 <template>
   <article>
     <div class="flex justify-between">
-      <div class="flex">
-        <img
-          :src="article.author.image"
-          alt="User profile picture"
-          class="rounded-full h-12 w-12 mr-2 self-center"
-        />
-        <div>
-          <a href="#" class="text-green-500 text-xl">
-            {{ article.author.username }}</a
-          >
-          <time class="block text-gray-600 opacity-75">
-            {{ formattedDate }}
-          </time>
-        </div>
-      </div>
+      <BaseAuthor :article="article" />
       <form method="POST" action="#">
         <button
           type="submit"
@@ -29,13 +15,17 @@
     <p class="text-xl text-gray-600 opacity-75 mb-4">
       {{ article.description }}
     </p>
-    <a href="#" class="text-gray-500 opacity-75">Read more...</a>
+    <nuxt-link
+      :to="`/article/${article.slug}`"
+      class="text-gray-500 opacity-75"
+    >
+      Read more...
+    </nuxt-link>
     <div v-if="hasDivider" class="border-b border-gray-400 mt-8"></div>
   </article>
 </template>
 <script lang="ts">
 import Vue, { PropOptions } from 'vue';
-import dayjs from 'dayjs';
 import { Article } from '~/constants/api';
 
 export default Vue.extend({
@@ -48,12 +38,6 @@ export default Vue.extend({
       default: true,
       type: Boolean,
     } as PropOptions<boolean>,
-  },
-
-  computed: {
-    formattedDate(): string {
-      return dayjs(this.article.createdAt).format('MMMM D, YYYY');
-    },
   },
 });
 </script>
