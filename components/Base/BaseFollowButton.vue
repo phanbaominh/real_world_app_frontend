@@ -21,9 +21,7 @@ export default Vue.extend({
     } as PropOptions<boolean>,
   },
   methods: {
-    onFollow() {
-      console.log('follow');
-    },
+    onFollow() {},
   },
 });
 </script>

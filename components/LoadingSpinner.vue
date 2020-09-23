@@ -16,7 +16,7 @@
   animation-duration: 1s;
   animation-timing-function: linear;
   animation-iteration-count: infinite;
-  @apply border-2 border-blue-400 rounded-full w-4 h-4;
+  @apply border-2 border-blue-400 rounded-full w-5 h-5;
 
   border-top-color: white;
 }

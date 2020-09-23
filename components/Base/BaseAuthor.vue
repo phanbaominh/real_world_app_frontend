@@ -6,7 +6,7 @@
       class="rounded-full h-12 w-12 mr-2 self-center"
     />
     <div>
-      <a href="#" class="text-green-500 text-xl">
+      <a href="#" class="text-green-500 text-xl hover:underline">
         {{ article.author.username }}</a
       >
       <time class="block text-gray-600 opacity-75">

@@ -40,7 +40,8 @@ export const actions = actionTree(
       commit('SET_ARTICLE', article);
       if (slug) commit('SET_ARTICLE_URL', url);
     },
-    async refreshArticle({ dispatch }) {
+    async refreshArticle({ dispatch, state }) {
+      if (!state.currentArticleApiUrl) return;
       await dispatch('setArticle');
     },
     async favoriteArticle({ dispatch }, slug) {

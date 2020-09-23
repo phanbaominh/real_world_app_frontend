@@ -1,8 +1,10 @@
 <template>
-  <BaseButton :class="{ active: isFavorited }" @click="onFavorite"
+  <BaseButton :class="{ active: currentIsFavorited }" @click="onFavorite"
     ><FontAwesomeIcon icon="heart" />
-    {{ !isFavorited ? 'Favorite article' : 'Unfavorite article' }}
-    ({{ favCount }})
+    <span v-if="hasText">{{
+      !currentIsFavorited ? 'Favorite article' : 'Unfavorite article'
+    }}</span>
+    ({{ currentFavCount }})
   </BaseButton>
 </template>
 <script lang="ts">
@@ -21,13 +23,40 @@ export default Vue.extend({
       required: true,
       type: String,
     } as PropOptions<string>,
+    hasText: {
+      type: Boolean,
+      default: true,
+    } as PropOptions<boolean>,
+  },
+  data() {
+    return {
+      currentIsFavorited: this.isFavorited,
+      currentFavCount: this.favCount,
+      hasAlreadyUpdated: false,
+    };
+  },
+  watch: {
+    isFavorited(val) {
+      this.currentIsFavorited = val;
+      this.hasAlreadyUpdated = true;
+    },
+    favCount(val) {
+      this.currentFavCount = val;
+    },
   },
   methods: {
-    onFavorite() {
-      if (!this.isFavorited) {
-        this.$accessor.favoriteArticle(this.articleSlug);
+    async onFavorite() {
+      this.hasAlreadyUpdated = false;
+      if (!this.currentIsFavorited) {
+        await this.$accessor.favoriteArticle(this.articleSlug);
+        if (this.hasAlreadyUpdated) return;
+        this.currentIsFavorited = true;
+        this.currentFavCount += 1;
       } else {
-        this.$accessor.unfavoriteArticle(this.articleSlug);
+        await this.$accessor.unfavoriteArticle(this.articleSlug);
+        if (this.hasAlreadyUpdated) return;
+        this.currentIsFavorited = false;
+        this.currentFavCount -= 1;
       }
     },
   },

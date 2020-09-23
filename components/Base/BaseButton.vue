@@ -9,7 +9,7 @@ export default Vue.extend({
     },
   },
   render(h, { props: { color }, children, listeners, data }) {
-    const buttonClasses = `text-${color} border-2 border-${color} p-1 px-2 rounded-md hover:text-white hover:bg-${color} `;
+    const buttonClasses = `text-sm self-start lg:text-base text-${color} border-2 border-${color} p-2 rounded-md hover:text-white hover:bg-${color} `;
     return h(
       'button',
       {

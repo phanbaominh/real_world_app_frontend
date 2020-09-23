@@ -2,12 +2,21 @@
   <section>
     <HomepageMainFeedHeader @switch-feed="onSwitchFeed" />
     <BaseFetcher :fetch-state="$fetchState">
-      <template #pending>Fetching articles...</template>
+      <template #pending>
+        <span class="text-xl">Fetching articles...<LoadingSpinner /></span>
+      </template>
       <section class="mt-4">
-        <BasePagination v-slot="slotProps" :items="articles">
-          <div class="mb-12">
-            <HomepageMainFeedArticles :articles="slotProps.items" />
-          </div>
+        <BasePagination :items="articles">
+          <template #default="slotProps">
+            <div class="mb-12">
+              <HomepageMainFeedArticles :articles="slotProps.items" />
+            </div>
+          </template>
+          <template #empty>
+            <span class="text-xl">
+              Follow authors to see their articles here!
+            </span>
+          </template>
         </BasePagination>
       </section>
     </BaseFetcher>

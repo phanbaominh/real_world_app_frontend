@@ -1,6 +1,7 @@
 <template>
   <section>
-    <slot :items="displayedItems"></slot>
+    <slot v-if="displayedItems.length > 0" :items="displayedItems"></slot>
+    <slot v-else name="empty"></slot>
     <div v-if="pageCount > 1" class="page-button-wrapper">
       <button
         v-for="i in pageCount"

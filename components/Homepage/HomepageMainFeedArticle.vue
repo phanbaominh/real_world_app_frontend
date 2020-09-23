@@ -2,22 +2,23 @@
   <article>
     <div class="flex justify-between">
       <BaseAuthor :article="article" />
-      <form method="POST" action="#">
-        <button
-          type="submit"
-          class="text-green-500 border-green-400 border-2 p-2 rounded hover:text-white hover:bg-green-500"
-        >
-          <FontAwesomeIcon icon="heart" /> {{ article.favoritesCount }}
-        </button>
-      </form>
+      <BaseFavoriteButton
+        :fav-count="article.favoritesCount"
+        :is-favorited="article.favorited"
+        :article-slug="article.slug"
+        :has-text="false"
+        class="text-sm"
+      />
     </div>
-    <h2 class="text-3xl font-bold">{{ article.title }}</h2>
-    <p class="text-xl text-gray-600 opacity-75 mb-4">
+    <nuxt-link :to="`/article/${article.slug}`">
+      <h2 class="text-2xl lg:text-3xl font-bold">{{ article.title }}</h2>
+    </nuxt-link>
+    <p class="text-lg lg:text-xl text-gray-600 opacity-75 mb-4">
       {{ article.description }}
     </p>
     <nuxt-link
       :to="`/article/${article.slug}`"
-      class="text-gray-500 opacity-75"
+      class="text-gray-500 opacity-75 text-sm lg:text-base"
     >
       Read more...
     </nuxt-link>
