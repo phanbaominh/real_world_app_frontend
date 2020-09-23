@@ -34,7 +34,7 @@ export default {
    ** Plugins to load before mounting the App
    ** https://nuxtjs.org/guide/plugins
    */
-  plugins: ['~/plugins/axios.ts', '~/plugins/dayjs.ts'],
+  plugins: ['~/plugins/axios.ts', '~/plugins/dayjs.ts', '~/plugins/api.ts'],
   /*
    ** Auto import components
    ** See https://nuxtjs.org/api/configuration-components
@@ -71,7 +71,7 @@ export default {
    */
   fontawesome: {
     icons: {
-      solid: ['faHeart'],
+      solid: ['faHeart', 'faPlus'],
     },
   },
   build: {},

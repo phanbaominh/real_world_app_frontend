@@ -1,15 +1,16 @@
 <template>
   <footer class="flex">
     <BaseAuthor :article="article" />
-    <ArticleTwoButtons :author="article.author.username" />
+    <ArticleTwoButtons :article="article" />
   </footer>
 </template>
 <script lang="ts">
 import Vue from 'vue';
+import { Article } from '~/constants/api';
 export default Vue.extend({
   computed: {
     article() {
-      return this.$accessor.currentArticleD;
+      return this.$accessor.currentArticle as Article;
     },
   },
 });

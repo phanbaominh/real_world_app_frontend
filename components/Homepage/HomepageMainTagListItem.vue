@@ -14,7 +14,7 @@ export default Vue.extend({
   },
   methods: {
     filterFeedByTag() {
-      this.$accessor.setSelectedTag(this.tagName);
+      this.$accessor.SET_SELECTED_TAG(this.tagName);
     },
   },
 });

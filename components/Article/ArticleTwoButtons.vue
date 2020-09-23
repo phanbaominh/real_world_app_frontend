@@ -1,27 +1,26 @@
 <template>
   <div>
-    <ArticleButton color="gray-600" e-class="mr-2" @click="onFollow">
-      Follow {{ author }}
-    </ArticleButton>
-    <ArticleButton @click="onFavorite">Favorite Article</ArticleButton>
+    <BaseFollowButton
+      class="mr-2"
+      :is-followed="false"
+      :author="article.author.username"
+    />
+    <BaseFavoriteButton
+      :fav-count="article.favoritesCount"
+      :is-favorited="article.favorited"
+      :article-slug="article.slug"
+    />
   </div>
 </template>
 <script lang="ts">
 import Vue, { PropOptions } from 'vue';
+import { Article } from '~/constants/api';
 export default Vue.extend({
   props: {
-    author: {
+    article: {
       required: true,
-      type: String,
-    } as PropOptions<string>,
-  },
-  methods: {
-    onFollow() {
-      console.log('follow');
-    },
-    onFavorite() {
-      console.log('favorite');
-    },
+      type: Object,
+    } as PropOptions<Article>,
   },
 });
 </script>

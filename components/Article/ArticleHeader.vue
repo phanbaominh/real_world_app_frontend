@@ -6,18 +6,20 @@
         <BaseAuthor :article="article" />
       </div>
       <div class="flex items-end">
-        <ArticleTwoButtons :author="article.author.username" />
+        <ArticleTwoButtons :article="article" />
       </div>
+      <div class="text-red-700">{{ article.favoritesCount }}</div>
     </div>
     <div class="flex-grow"></div>
   </header>
 </template>
 <script lang="ts">
 import Vue from 'vue';
+import { Article } from '~/constants/api';
 export default Vue.extend({
   computed: {
     article() {
-      return this.$accessor.currentArticleD;
+      return this.$accessor.currentArticle as Article;
     },
   },
 });

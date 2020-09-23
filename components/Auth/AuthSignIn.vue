@@ -15,7 +15,9 @@
       name="password"
       type="password"
     />
-    <BaseButton type="submit" :o-class="'px-4 self-end'"> Sign in </BaseButton>
+    <BaseSolidButton type="submit" class="px-4 self-end">
+      Sign in
+    </BaseSolidButton>
   </AuthBaseForm>
 </template>
 <script lang="ts">
