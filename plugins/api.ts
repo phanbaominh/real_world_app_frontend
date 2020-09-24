@@ -8,29 +8,60 @@ interface SlugToUrl {
 interface UsernameToUrl {
   (username: string): Url;
 }
+
+interface ArticleQueryObject {
+  author?: string;
+  tag?: string;
+  favorited?: string;
+  limit?: number;
+  offset?: number;
+}
 interface ApiUrl {
   getArticle: SlugToUrl;
   favoriteArticle: SlugToUrl;
   followUser: UsernameToUrl;
+  getProfile: UsernameToUrl;
+  queryArticle: (queryObject?: ArticleQueryObject) => Url;
+  getFeed: Url;
 }
+
 declare module 'vue/types/vue' {
   interface Vue {
     $apiUrl: ApiUrl;
   }
 }
-
+declare module '@nuxt/types' {
+  // nuxtContext.app.$myInjectedFunction inside asyncData, fetch, plugins, middleware, nuxtServerInit
+  interface NuxtAppOptions {
+    $apiUrl: ApiUrl;
+  }
+  // nuxtContext.$myInjectedFunction
+  interface Context {
+    $apiUrl: ApiUrl;
+  }
+}
 declare module 'vuex/types/index' {
   interface Store<S> {
     $apiUrl: ApiUrl;
   }
 }
 const apiPlugin: Plugin = ({ $config: { apiURL } }, inject) => {
-  const articleUrl = (slug: string) => `${apiURL}/api/articles/${slug}`;
+  const articlesUrl = `${apiURL}/api/articles`;
+  const articleUrl = (slug: string) => `${articlesUrl}/${slug}`;
   const profileUrl = (username: string) => `${apiURL}/api/profiles/${username}`;
   inject('apiUrl', {
     getArticle: (slug: string) => articleUrl(slug),
     favoriteArticle: (slug: string) => `${articleUrl(slug)}/favorite`,
     folllowUser: (username: string) => `${profileUrl(username)}/follow`,
+    getProfile: (username: string) => profileUrl(username),
+    getFeed: `${articlesUrl}/feed`,
+    queryArticle: (queryObject?: ArticleQueryObject) => {
+      return Object.entries(queryObject || {})
+        .reduce((queryString, [key, value], index) => {
+          return (queryString += `${key}=${value}${index === 0 ? '&' : ''}`);
+        }, `${articlesUrl}?`)
+        .slice(0, -1);
+    },
   });
 };
 

@@ -2,12 +2,11 @@
   <article>
     <div class="flex justify-between">
       <BaseAuthor :article="article" />
-      <BaseFavoriteButton
+      <BaseButtonFavorite
         :fav-count="article.favoritesCount"
         :is-favorited="article.favorited"
         :article-slug="article.slug"
         :has-text="false"
-        class="text-sm"
       />
     </div>
     <nuxt-link :to="`/article/${article.slug}`">

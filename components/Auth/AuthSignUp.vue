@@ -22,9 +22,9 @@
       name="password"
       type="password"
     />
-    <BaseSolidButton type="submit" class="px-4 self-end">
+    <BaseButtonSolid type="submit" class="px-4 self-end">
       Sign up
-    </BaseSolidButton>
+    </BaseButtonSolid>
   </AuthBaseForm>
 </template>
 <script lang="ts">

@@ -55,13 +55,16 @@ export default Vue.extend({
     switchFeed() {
       switch (this.currentTab) {
         case 2:
-          this.$emit('switch-feed', 'api/articles/feed');
+          this.$parent.$emit('switch-feed', this.$apiUrl.getFeed);
           break;
         case 0:
-          this.$emit('switch-feed', 'api/articles');
+          this.$parent.$emit('switch-feed', this.$apiUrl.queryArticle());
           break;
         default:
-          this.$emit('switch-feed', `api/articles?tag=${this.selectedTag}`);
+          this.$parent.$emit(
+            'switch-feed',
+            this.$apiUrl.queryArticle({ tag: this.selectedTag! })
+          );
           break;
       }
     },

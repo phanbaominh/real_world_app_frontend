@@ -9,17 +9,14 @@
 </template>
 <script lang="ts">
 import Vue, { PropOptions } from 'vue';
-interface fetchState {
-  error: Error | null;
-  pending: boolean;
-  timestamp: number;
-}
+import { FetchState } from '~/constants/api';
+
 export default Vue.extend({
   props: {
     fetchState: {
       required: true,
       type: Object,
-    } as PropOptions<fetchState>,
+    } as PropOptions<FetchState>,
   },
 });
 </script>

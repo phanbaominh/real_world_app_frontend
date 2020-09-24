@@ -1,11 +1,11 @@
 <template>
   <div>
-    <BaseFollowButton
+    <BaseButtonFollow
       class="mr-2"
       :is-followed="false"
       :author="article.author.username"
     />
-    <BaseFavoriteButton
+    <BaseButtonFavorite
       :fav-count="article.favoritesCount"
       :is-favorited="article.favorited"
       :article-slug="article.slug"

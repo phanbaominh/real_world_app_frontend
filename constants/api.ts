@@ -16,3 +16,16 @@ export interface Article {
   favoritesCount: number;
   author: User;
 }
+
+export interface Profile {
+  username: string;
+  bio: string;
+  image: string;
+  following: boolean;
+}
+
+export interface FetchState {
+  error: Error | null;
+  pending: boolean;
+  timestamp: number;
+}
