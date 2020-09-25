@@ -2,7 +2,7 @@
   <section class="flex items-center flex-col">
     <h1 class="text-2xl lg:text-5xl"><slot name="heading"></slot></h1>
     <div v-if="error">
-      <ul class="text-lg justify-endlg:text-xl text-red-700">
+      <ul class="text-lg justify-end lg:text-2xl text-red-700">
         <li v-for="(value, key) in error" :key="key">
           {{ key }} {{ value.join('and') }}
         </li>
@@ -20,10 +20,16 @@
 <script lang="ts">
 import Vue from 'vue';
 export default Vue.extend({
-  props: {
-    // eslint-disable-next-line vue/require-default-prop
-    error: {
-      type: Object,
+  // eslint-disable-next-line vue/require-prop-types
+  props: ['initialError'],
+  data() {
+    return { error: this.initialError };
+  },
+  watch: {
+    initialError(newError) {
+      this.error = newError.response
+        ? newError.response.data.errors
+        : this.$nuxt.error({ statusCode: 500, message: newError.message });
     },
   },
   methods: {

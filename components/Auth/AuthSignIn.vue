@@ -1,5 +1,5 @@
 <template>
-  <AuthBaseForm :error="error" @submit="onSignIn">
+  <AuthBaseForm :initial-error="error" @submit="onSignIn">
     <template #heading>Sign in</template>
     <AuthBaseFormInput
       v-model="user.email"
@@ -33,9 +33,7 @@ export default Vue.extend({
         await this.$auth.loginWith('local', { data: { user: this.user } });
         this.$router.push('/');
       } catch (err) {
-        this.error = err.response
-          ? err.response.data.errors
-          : this.$nuxt.error({ statusCode: 500, message: err.message });
+        this.error = err;
       }
     },
   },

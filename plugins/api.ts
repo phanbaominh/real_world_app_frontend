@@ -24,6 +24,7 @@ interface ApiUrl {
   queryArticles: (queryObject?: ArticleQueryObject) => Url;
   getFeed: Url;
   user: Url;
+  articles: Url;
 }
 
 declare module 'vue/types/vue' {
@@ -64,6 +65,7 @@ const apiPlugin: Plugin = ({ $config: { apiURL } }, inject) => {
         .slice(0, -1);
     },
     user: `${apiURL}/api/user`,
+    articles: articlesUrl,
   });
 };
 

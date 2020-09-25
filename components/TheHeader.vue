@@ -10,6 +10,9 @@
         <HeaderButton link="/signup">Sign up</HeaderButton>
       </template>
       <template v-else>
+        <HeaderButton link="/editor">
+          <FontAwesomeIcon icon="edit" /> New Article
+        </HeaderButton>
         <HeaderButton link="/settings">
           <BaseButtonSettings class="focus:outline-none" />
         </HeaderButton>

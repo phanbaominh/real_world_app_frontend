@@ -15,12 +15,24 @@
     <p class="text-lg lg:text-xl text-gray-600 opacity-75 mb-4">
       {{ article.description }}
     </p>
-    <nuxt-link
-      :to="`/article/${article.slug}`"
-      class="text-gray-500 opacity-75 text-sm lg:text-base"
-    >
-      Read more...
-    </nuxt-link>
+    <div class="flex">
+      <nuxt-link
+        :to="`/article/${article.slug}`"
+        class="text-gray-500 opacity-75 text-sm lg:text-base"
+      >
+        Read more...
+      </nuxt-link>
+      <div class="flex flex-grow justify-end">
+        <div
+          v-for="tag in article.tagList"
+          :key="tag"
+          class="rounded-full px-2 text-lg border-gray-500 opacity-75 border text-gray-500 cursor-pointer mr-2"
+          @click="onSelectTag(tag)"
+        >
+          {{ tag }}
+        </div>
+      </div>
+    </div>
     <BaseDivider v-if="hasDivider" class="mt-8" />
   </article>
 </template>
@@ -38,6 +50,11 @@ export default Vue.extend({
       default: true,
       type: Boolean,
     } as PropOptions<boolean>,
+  },
+  methods: {
+    onSelectTag(tag: string) {
+      this.$accessor.SET_SELECTED_TAG(tag);
+    },
   },
 });
 </script>
