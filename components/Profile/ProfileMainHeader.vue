@@ -40,12 +40,12 @@ export default Vue.extend({
       if (this.currentTab === 0) {
         this.$parent.$emit(
           'switch-feed',
-          this.$apiUrl.queryArticle({ author: this.username })
+          this.$apiUrl.queryArticles({ author: this.username })
         );
       } else {
         this.$parent.$emit(
           'switch-feed',
-          this.$apiUrl.queryArticle({ favorited: this.username })
+          this.$apiUrl.queryArticles({ favorited: this.username })
         );
       }
     },

@@ -3,6 +3,8 @@ export interface User {
   bio: string;
   image: string;
   following: boolean;
+  email: string;
+  password: string;
 }
 export interface Article {
   slug: string;

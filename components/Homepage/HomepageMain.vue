@@ -4,7 +4,7 @@
   >
     <BaseArticleFeed
       class="flex-grow p-2 w-full lg:mr-4 lg:w-auto"
-      :initial-query="$auth.user ? 'api/articles/feed' : 'api/articles'"
+      :initial-query="$auth.user ? $apiUrl.getFeed : $apiUrl.queryArticles()"
     >
       <HomepageMainFeedHeader />
     </BaseArticleFeed>

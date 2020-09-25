@@ -21,8 +21,9 @@ interface ApiUrl {
   favoriteArticle: SlugToUrl;
   followUser: UsernameToUrl;
   getProfile: UsernameToUrl;
-  queryArticle: (queryObject?: ArticleQueryObject) => Url;
+  queryArticles: (queryObject?: ArticleQueryObject) => Url;
   getFeed: Url;
+  user: Url;
 }
 
 declare module 'vue/types/vue' {
@@ -55,13 +56,14 @@ const apiPlugin: Plugin = ({ $config: { apiURL } }, inject) => {
     folllowUser: (username: string) => `${profileUrl(username)}/follow`,
     getProfile: (username: string) => profileUrl(username),
     getFeed: `${articlesUrl}/feed`,
-    queryArticle: (queryObject?: ArticleQueryObject) => {
+    queryArticles: (queryObject?: ArticleQueryObject) => {
       return Object.entries(queryObject || {})
         .reduce((queryString, [key, value], index) => {
           return (queryString += `${key}=${value}${index === 0 ? '&' : ''}`);
         }, `${articlesUrl}?`)
         .slice(0, -1);
     },
+    user: `${apiURL}/api/user`,
   });
 };
 

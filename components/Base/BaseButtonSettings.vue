@@ -5,7 +5,9 @@
 import Vue from 'vue';
 export default Vue.extend({
   methods: {
-    onSettings() {},
+    onSettings() {
+      this.$router.push('/settings');
+    },
   },
 });
 </script>

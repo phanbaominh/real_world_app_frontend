@@ -11,9 +11,7 @@
           </div>
         </template>
         <template #empty>
-          <span class="text-xl">
-            Follow authors to see their articles here!
-          </span>
+          <span class="text-xl"> No articles are here yet! </span>
         </template>
       </BasePagination>
     </section>

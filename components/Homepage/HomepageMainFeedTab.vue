@@ -1,5 +1,5 @@
 <template>
-  <div class="text-xl px-4 cursor-pointer" @click="onSelectedTab">
+  <div class="text-lg lg:text-xl px-4 cursor-pointer" @click="onSelectedTab">
     <slot></slot>
   </div>
 </template>

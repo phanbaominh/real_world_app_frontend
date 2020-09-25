@@ -2,7 +2,8 @@
   <section>
     <ProfileHero :profile="profile" />
     <BaseArticleFeed
-      :initial-query="$apiUrl.queryArticle({ author: profile.username })"
+      :initial-query="$apiUrl.queryArticles({ author: profile.username })"
+      class="p-4 lg:mx-auto lg:w-2/3"
     >
       <ProfileMainHeader :username="profile.username" />
     </BaseArticleFeed>

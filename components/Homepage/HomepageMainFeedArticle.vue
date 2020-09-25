@@ -21,7 +21,7 @@
     >
       Read more...
     </nuxt-link>
-    <div v-if="hasDivider" class="border-b border-gray-400 mt-8"></div>
+    <BaseDivider v-if="hasDivider" class="mt-8" />
   </article>
 </template>
 <script lang="ts">

@@ -1,8 +1,8 @@
 <template>
   <section class="flex items-center flex-col">
-    <h1 class="text-5xl"><slot name="heading"></slot></h1>
+    <h1 class="text-2xl lg:text-5xl"><slot name="heading"></slot></h1>
     <div v-if="error">
-      <ul class="text-xl text-red-700">
+      <ul class="text-lg justify-endlg:text-xl text-red-700">
         <li v-for="(value, key) in error" :key="key">
           {{ key }} {{ value.join('and') }}
         </li>
@@ -10,7 +10,7 @@
     </div>
     <form
       method="POST"
-      class="auth-form text-2xl mt-2 flex-col flex w-1/4"
+      class="auth-form text-base px-4 lg:p-0 lg:text-2xl lg:mt-2 flex-col flex w-full sm:w-1/2 lg:w-1/4"
       @submit="onSubmit"
     >
       <slot></slot>

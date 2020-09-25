@@ -2,14 +2,12 @@
   <AuthBaseForm :error="error" @submit="onSignIn">
     <template #heading>Sign in</template>
     <AuthBaseFormInput
-      :id="'email-input'"
       v-model="user.email"
       :label="'Email'"
       name="email"
       type="text"
     />
     <AuthBaseFormInput
-      :id="'password-input'"
       v-model="user.password"
       :label="'Password'"
       name="password"

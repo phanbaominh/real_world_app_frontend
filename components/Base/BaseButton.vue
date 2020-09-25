@@ -13,7 +13,7 @@ export default Vue.extend({
     return h(
       'button',
       {
-        class: buttonClasses + (data.class.active ? 'active' : ''),
+        class: data.class,
         on: {
           click: () => {
             if (Array.isArray(listeners.click))
@@ -21,6 +21,7 @@ export default Vue.extend({
             else if (listeners.click) listeners.click();
           },
         },
+        staticClass: buttonClasses + ' ' + data.staticClass,
       },
       children
     );

@@ -58,12 +58,12 @@ export default Vue.extend({
           this.$parent.$emit('switch-feed', this.$apiUrl.getFeed);
           break;
         case 0:
-          this.$parent.$emit('switch-feed', this.$apiUrl.queryArticle());
+          this.$parent.$emit('switch-feed', this.$apiUrl.queryArticles());
           break;
         default:
           this.$parent.$emit(
             'switch-feed',
-            this.$apiUrl.queryArticle({ tag: this.selectedTag! })
+            this.$apiUrl.queryArticles({ tag: this.selectedTag! })
           );
           break;
       }
