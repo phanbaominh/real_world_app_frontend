@@ -59,6 +59,7 @@ export default {
     // Doc: https://axios.nuxtjs.org/usage
     '@nuxtjs/axios',
     '@nuxtjs/auth',
+    '@nuxtjs/toast',
   ],
   /*
    ** Axios module configuration
@@ -107,5 +108,13 @@ export default {
         // autoFetchUser: true
       },
     },
+  },
+  toast: {
+    duration: 3000,
+    theme: 'outline',
+    containerClass: 'custom-toast-container',
+    className: 'custom-toast-content',
+    position: 'top-right',
+    keepOnHover: true,
   },
 };

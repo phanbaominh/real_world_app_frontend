@@ -1,17 +1,21 @@
 <template>
-  <header class="flex justify-between">
+  <header class="flex justify-between py-2">
     <div class="flex-grow text-center">
-      <h1 class="text-green-400 text-3xl">conduit</h1>
+      <h1 class="text-conduit-green text-xl xl:text-3xl">conduit</h1>
     </div>
-    <nav class="text-xl flex-grow flex justify-center">
+    <nav class="flex-grow flex justify-center self-center">
       <HeaderButton link="/">Home</HeaderButton>
       <template v-if="!$auth.user">
         <HeaderButton link="/login">Sign in</HeaderButton>
         <HeaderButton link="/signup">Sign up</HeaderButton>
       </template>
       <template v-else>
-        <button @click="logOut">Sign out</button>
-        <HeaderButton link="#">{{ $auth.user.username }}</HeaderButton>
+        <HeaderButton link="/settings">
+          <BaseButtonSettings class="focus:outline-none" />
+        </HeaderButton>
+        <HeaderButton :link="`/@${$auth.user.username}`">{{
+          $auth.user.username
+        }}</HeaderButton>
       </template>
     </nav>
   </header>

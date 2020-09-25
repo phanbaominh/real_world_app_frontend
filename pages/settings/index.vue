@@ -1,38 +1,38 @@
 <template>
-  <AuthBaseForm :error="error">
+  <AuthBaseForm :error="error" @submit="onSubmit">
     <template #heading>Your Settings</template>
     <AuthBaseFormInput
+      v-model="user.image"
       label="Url of profile picture"
       name="image"
       type="text"
-      :value="user.image"
     />
     <AuthBaseFormInput
+      v-model="user.username"
       label="Username"
       name="username"
       type="text"
-      :value="user.username"
     />
     <textarea
+      v-model="user.bio"
       placeholder="Short bio about you"
-      :value="user.bio"
       aria-label="Short bio about you"
       class="border-gray-400 p-2 border rounded-lg"
       name="bio"
     />
     <AuthBaseFormInput
+      v-model="user.email"
       label="Email"
       name="email"
       type="text"
-      :value="user.email"
     />
     <AuthBaseFormInput
+      v-model="user.password"
       label="New password"
       name="password"
       type="password"
-      :value="user.password"
     />
-    <BaseButtonSolid type="submit" class="px-4 self-end">
+    <BaseButtonSolid type="submit" class="lg:px-4 self-end">
       Update Profile
     </BaseButtonSolid>
     <BaseDivider />
@@ -53,15 +53,16 @@ import { User } from '~/constants/api';
 export default Vue.extend({
   data() {
     return {
-      user: this.$auth.user as User,
+      user: { ...this.$auth.user } as User,
       error: null as Object | null,
     };
   },
   methods: {
-    async onSubmit(e: Event) {
-      e.preventDefault();
+    async onSubmit() {
       try {
-        await this.$axios.$put(this.$apiUrl.user);
+        await this.$axios.$put(this.$apiUrl.user, { user: this.user });
+        await this.$auth.fetchUser();
+        this.$toast.success('Successfully update your profile');
       } catch (err) {
         this.error = err.response
           ? err.response.data.errors

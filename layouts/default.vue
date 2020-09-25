@@ -27,4 +27,16 @@ html {
   box-sizing: border-box;
   margin: 0;
 }
+
+.custom-toast-container {
+  top: 0% !important;
+  right: 0% !important;
+}
+
+.custom-toast-content {
+  @screen lg {
+    @apply max-w-xs;
+  }
+  @apply text-lg !important;
+}
 </style>

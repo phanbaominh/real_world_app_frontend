@@ -15,9 +15,7 @@
         <BaseButtonSettings
           v-if="isCurrentUser"
           class="text-sm self-start lg:text-base text-gray-600 border-2 border-gray-600 p-2 rounded-md hover:text-white hover:bg-gray-600"
-        >
-          <FontAwesomeIcon icon="cog" /> Settings
-        </BaseButtonSettings>
+        />
         <BaseButtonFollow
           v-else
           :author="profile.username"
