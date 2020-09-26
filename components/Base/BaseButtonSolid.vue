@@ -1,7 +1,22 @@
 <template>
   <button
-    class="rounded-md p-2 text-white bg-conduit-green hover:bg-green-700 text-sm lg:text-xl"
+    :class="`bg-${color} text-white border-2 border-${color} p-2 rounded-md hover:bg-${hoverColor}`"
   >
-    <slot></slot>
+    <slot> </slot>
   </button>
 </template>
+<script lang="ts">
+import Vue from 'vue';
+export default Vue.extend({
+  props: {
+    color: {
+      default: 'conduit-green',
+      type: String,
+    },
+    hoverColor: {
+      default: 'green-600',
+      type: String,
+    },
+  },
+});
+</script>

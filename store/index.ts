@@ -33,12 +33,14 @@ export const actions = actionTree(
   { state, mutations, getters },
   {
     async setArticle({ commit, state }, slug) {
-      const url = this.$apiUrl.getArticle(slug);
-      const article = (
-        await this.$axios.$get(state.currentArticleApiUrl || url)
-      ).article;
+      const newUrl =
+        typeof slug === 'string' ? this.$apiUrl.getArticle(slug) : null;
+      const url = newUrl || state.currentArticleApiUrl;
+      if (!url) return;
+
+      const article = (await this.$axios.$get(url)).article;
       commit('SET_ARTICLE', article);
-      if (slug) commit('SET_ARTICLE_URL', url);
+      if (slug) commit('SET_ARTICLE_URL', newUrl);
     },
     async refreshArticle({ dispatch, state }) {
       if (!state.currentArticleApiUrl) return;

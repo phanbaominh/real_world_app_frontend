@@ -14,13 +14,14 @@
 </template>
 <script lang="ts">
 import Vue from 'vue';
+import { Article } from '~/constants/api';
 export default Vue.extend({
   async asyncData({ store, route }) {
     await store.dispatch('setArticle', route.params.slug);
   },
   computed: {
     article() {
-      return this.$accessor.currentArticleD;
+      return this.$accessor.currentArticle as Article;
     },
   },
 });
