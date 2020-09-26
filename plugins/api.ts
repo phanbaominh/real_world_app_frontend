@@ -19,12 +19,15 @@ interface ArticleQueryObject {
 interface ApiUrl {
   getArticle: SlugToUrl;
   favoriteArticle: SlugToUrl;
+  getComments: SlugToUrl;
   followUser: UsernameToUrl;
   getProfile: UsernameToUrl;
   queryArticles: (queryObject?: ArticleQueryObject) => Url;
   getFeed: Url;
   user: Url;
   articles: Url;
+  comments: SlugToUrl;
+  deleteComment: (articleSlug: string, commentId: number) => Url;
 }
 
 declare module 'vue/types/vue' {
@@ -51,6 +54,8 @@ const apiPlugin: Plugin = ({ $config: { apiURL } }, inject) => {
   const articlesUrl = `${apiURL}/api/articles`;
   const articleUrl = (slug: string) => `${articlesUrl}/${slug}`;
   const profileUrl = (username: string) => `${apiURL}/api/profiles/${username}`;
+  const commentsUrl = (articleSlug: string) =>
+    `${articleUrl(articleSlug)}/comments`;
   inject('apiUrl', {
     getArticle: (slug: string) => articleUrl(slug),
     favoriteArticle: (slug: string) => `${articleUrl(slug)}/favorite`,
@@ -66,6 +71,9 @@ const apiPlugin: Plugin = ({ $config: { apiURL } }, inject) => {
     },
     user: `${apiURL}/api/user`,
     articles: articlesUrl,
+    comments: (articleSlug: string) => commentsUrl(articleSlug),
+    deleteComment: (articleSlug: string, commentId: number) =>
+      `${commentsUrl(articleSlug)}/${commentId}`,
   });
 };
 

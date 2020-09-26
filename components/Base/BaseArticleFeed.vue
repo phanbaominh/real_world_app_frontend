@@ -26,6 +26,7 @@ export default Vue.extend({
   },
   created() {
     this.$on('switch-feed', this.onSwitchFeed);
+    console.log(this.$fetchState);
     // this.articlesQuery = this.$auth.user ? 'api/articles/feed' : 'api/articles';
   },
   methods: {

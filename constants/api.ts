@@ -31,3 +31,11 @@ export interface FetchState {
   pending: boolean;
   timestamp: number;
 }
+
+export interface ArticleComment {
+  id: number;
+  createdAt: Date;
+  updatedAt: Date;
+  body: string;
+  author: Profile;
+}

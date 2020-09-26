@@ -1,6 +1,7 @@
 <template>
   <button
     :class="`bg-${color} text-white border-2 border-${color} p-2 rounded-md hover:bg-${hoverColor}`"
+    @click="$emit('click')"
   >
     <slot> </slot>
   </button>

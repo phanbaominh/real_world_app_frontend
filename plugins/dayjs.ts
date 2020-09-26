@@ -3,7 +3,7 @@ import { Plugin } from '@nuxt/types';
 declare module 'vue/types/vue' {
   // this.$myInjectedFunction inside Vue components
   interface Vue {
-    $formatDate: (date: Date, format?: string) => string;
+    $formatDate: (date: Date | string | number, format?: string) => string;
   }
 }
 
