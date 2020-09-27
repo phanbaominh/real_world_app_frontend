@@ -1,28 +1,32 @@
 <template>
-  <div class="flex flex-col">
+  <div class="flex flex-col mt-8">
     <textarea
       v-if="!comment"
       v-model="commentBody"
       placeholder="Write a comment..."
-      class="border-gray-400 p-2 border rounded-lg"
+      class="text-section"
     />
-    <div v-else>{{ comment.body }}</div>
-    <div class="flex bg-gray-300 py-2 px-4">
-      <div class="flex">
+    <div v-else class="text-section">{{ comment.body }}</div>
+    <div class="flex bg-gray-200 py-2 px-4 border-gray-400 border rounded-b-lg">
+      <div class="flex author-section">
         <nuxt-link :to="`/@${author.username}`">
           <BaseAuthorImage :image="author.image" />
         </nuxt-link>
-        <BaseAuthorName :username="author.username" />
-        <BaseAuthorCreatedDate
-          :created-at="comment ? comment.createdAt : Date.now()"
-        />
+        <div>
+          <BaseAuthorName :username="author.username" />
+          <BaseAuthorCreatedDate
+            :created-at="comment ? comment.createdAt : Date.now()"
+          />
+        </div>
       </div>
-      <button v-if="comment" @click="emitDeleteComment">
-        <FontAwesomeIcon icon="trash" />
-      </button>
-      <BaseButtonSolid v-else @click="$emit('post-comment', commentBody)">
-        Post Comment
-      </BaseButtonSolid>
+      <div class="flex flex-grow justify-end items-center">
+        <button v-if="comment" @click="emitDeleteComment">
+          <FontAwesomeIcon icon="trash" />
+        </button>
+        <BaseButtonSolid v-else @click="$emit('post-comment', commentBody)">
+          Post Comment
+        </BaseButtonSolid>
+      </div>
     </div>
   </div>
 </template>
@@ -50,3 +54,13 @@ export default Vue.extend({
   },
 });
 </script>
+<style scoped>
+.author-section > * {
+  @apply mr-2;
+}
+
+.text-section {
+  min-height: 8rem;
+  @apply border-gray-400 p-4 border border-b-0 rounded-t-lg text-lg;
+}
+</style>

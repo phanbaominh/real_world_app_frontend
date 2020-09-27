@@ -15,8 +15,8 @@
     <textarea
       v-model="article.body"
       class="border-gray-400 p-2 border rounded-lg"
-      aria-label="Write your article (in markdown)"
-      placeholder="Write your article (in markdown)"
+      aria-label="Write your article"
+      placeholder="Write your article"
       name="body"
     />
     <AuthBaseFormInput

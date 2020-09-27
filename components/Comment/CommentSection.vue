@@ -40,7 +40,8 @@ export default Vue.extend({
         this.$apiUrl.deleteComment(this.articleSlug, commentId)
       );
       this.comments.splice(
-        this.comments.findIndex((comment) => comment.id === commentId)
+        this.comments.findIndex((comment) => comment.id === commentId),
+        1
       );
     },
   },

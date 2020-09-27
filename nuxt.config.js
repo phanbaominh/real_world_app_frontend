@@ -117,4 +117,7 @@ export default {
     position: 'top-right',
     keepOnHover: true,
   },
+  markdownit: {
+    injected: true,
+  },
 };
