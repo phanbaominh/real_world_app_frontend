@@ -1,7 +1,13 @@
 <template>
   <section>
     <slot></slot>
-    <BaseArticleList :fetch-state="$fetchState" :articles="articles" />
+    <BaseArticleList
+      :fetch-state="$fetchState"
+      :articles="articles"
+      :articles-count="articlesCount"
+      :current-page="currentPage"
+      @new-page="onNewPage"
+    />
   </section>
 </template>
 <script lang="ts">
@@ -16,18 +22,20 @@ export default Vue.extend({
     } as PropOptions<string>,
   },
   async fetch() {
-    this.articles = (await this.$axios.$get(this.articlesQuery)).articles;
+    const response = await this.$axios.$get(this.articlesQuery);
+    this.articles = response.articles;
+    this.articlesCount = response.articlesCount;
   },
   data() {
     return {
       articles: [] as Article[],
+      articlesCount: 0,
       articlesQuery: this.initialQuery,
+      currentPage: 0,
     };
   },
   created() {
     this.$on('switch-feed', this.onSwitchFeed);
-    console.log(this.$fetchState);
-    // this.articlesQuery = this.$auth.user ? 'api/articles/feed' : 'api/articles';
   },
   methods: {
     onSwitchFeed(articlesQuery: string) {
@@ -38,6 +46,15 @@ export default Vue.extend({
         this.articlesQuery = articlesQuery;
         this.$fetch();
       }
+    },
+    async onNewPage(offset: number) {
+      if (this.articlesQuery.includes('?')) {
+        this.articlesQuery = `${this.articlesQuery}&offset=${offset}`;
+      } else {
+        this.articlesQuery = `${this.articlesQuery}?offset=${offset}`;
+      }
+      await this.$fetch();
+      this.currentPage = offset / 10;
     },
   },
 });

@@ -4,7 +4,12 @@
       <span class="text-xl">Fetching articles...<LoadingSpinner /></span>
     </template>
     <section class="mt-4">
-      <BasePagination :items="articles">
+      <BasePagination
+        :items="articles"
+        :all-count="articlesCount"
+        :current-page="currentPage"
+        @new-page="onNewPage"
+      >
         <template #default="slotProps">
           <div class="mb-12">
             <HomepageMainFeedArticles :articles="slotProps.items" />
@@ -30,6 +35,19 @@ export default Vue.extend({
       required: true,
       type: Object,
     } as PropOptions<FetchState>,
+    articlesCount: {
+      required: true,
+      type: Number,
+    } as PropOptions<number>,
+    currentPage: {
+      required: true,
+      type: Number,
+    } as PropOptions<number>,
+  },
+  methods: {
+    onNewPage(currentOffset: number) {
+      this.$emit('new-page', currentOffset);
+    },
   },
 });
 </script>

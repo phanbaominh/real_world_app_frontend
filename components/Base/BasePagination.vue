@@ -26,35 +26,75 @@ export default Vue.extend({
       default: 10,
       type: Number,
     } as PropOptions<number>,
+    allCount: {
+      required: true,
+      type: Number,
+    } as PropOptions<number>,
+    itemPerQuery: {
+      default: 20,
+      type: Number,
+    } as PropOptions<number>,
+    currentPage: {
+      required: true,
+      type: Number,
+    } as PropOptions<number>,
   },
   data() {
     return {
       pageCount: 0,
       displayedItems: [] as any[],
-      currentPageButton: null as HTMLElement | null,
+      currentPageButton: null as Element | null,
     };
   },
+  computed: {
+    currentOffset() {
+      return this.currentPage * this.itemPerPage;
+    },
+  },
+  watch: {
+    items(newItems) {
+      this.displayedItems = newItems;
+    },
+    currentPage() {
+      this.changeButtonHighlight(this.getNewPageButton());
+    },
+  },
   mounted() {
-    this.pageCount = Math.ceil(this.items.length / this.itemPerPage);
+    this.pageCount = Math.ceil(this.allCount / this.itemPerPage);
     this.displayedItems = this.items.slice(0, this.itemPerPage);
     this.$nextTick(() => {
-      this.currentPageButton = this.$el.querySelector(
-        '.page-button-wrapper button'
-      );
+      this.currentPageButton = this.getNewPageButton();
       this.currentPageButton?.classList.add('active');
     });
   },
   methods: {
     changePage(event: Event, pageNumber: number) {
-      const target = event.target as HTMLElement;
-      target.classList.add('active');
-      if (this.currentPageButton && this.currentPageButton !== target)
+      const newOffset = (pageNumber - 1) * this.itemPerPage;
+      if (
+        newOffset >= this.currentOffset + this.itemPerQuery ||
+        newOffset < this.currentOffset
+      ) {
+        this.$emit('new-page', newOffset);
+      } else {
+        const relativePageNumber =
+          (newOffset - this.currentOffset) / this.itemPerPage;
+        this.displayedItems = this.items.slice(
+          relativePageNumber * this.itemPerPage,
+          (relativePageNumber + 1) * this.itemPerPage
+        );
+      }
+      this.changeButtonHighlight(event.target as Element);
+    },
+    changeButtonHighlight(newButton: Element) {
+      newButton.classList.add('active');
+      if (this.currentPageButton && this.currentPageButton !== newButton)
         this.currentPageButton.classList.remove('active');
-      this.currentPageButton = target;
-      this.displayedItems = this.items.slice(
-        (pageNumber - 1) * this.itemPerPage,
-        pageNumber * this.itemPerPage
-      );
+      this.currentPageButton = newButton;
+    },
+    getNewPageButton(): Element {
+      return this.$el.querySelectorAll('.page-button-wrapper button')[
+        this.currentPage
+      ];
     },
   },
 });
