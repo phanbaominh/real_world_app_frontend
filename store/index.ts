@@ -56,6 +56,14 @@ export const actions = actionTree(
       await this.$axios.$delete(url);
       await dispatch('refreshArticle');
     },
+    async followUser({ dispatch }, username) {
+      await this.$axios.$post(this.$apiUrl.followUser(username));
+      await dispatch('refreshArticle');
+    },
+    async unfollowUser({ dispatch }, username) {
+      await this.$axios.$delete(this.$apiUrl.followUser(username));
+      await dispatch('refreshArticle');
+    },
   }
 );
 // This compiles to nothing and only serves to return the correct type of the accessor

@@ -1,10 +1,11 @@
 <template>
   <BaseButton
-    :class="{ active: isFollowed }"
+    :class="{ active: currentIsFollowed }"
     color="gray-600"
     @click="onFollow"
   >
-    <FontAwesomeIcon icon="plus" /> Follow {{ author }}
+    <FontAwesomeIcon icon="plus" />
+    {{ currentIsFollowed ? 'Unfollow' : 'Follow' }} {{ author }}
   </BaseButton>
 </template>
 <script lang="ts">
@@ -20,8 +21,35 @@ export default Vue.extend({
       required: true,
     } as PropOptions<boolean>,
   },
+  data() {
+    return {
+      currentIsFollowed: this.isFollowed,
+    };
+  },
+  watch: {
+    isFollowed(val) {
+      this.currentIsFollowed = val;
+    },
+  },
   methods: {
-    onFollow() {},
+    async onFollow() {
+      if (!this.currentIsFollowed) {
+        await this.$accessor.followUser(this.author);
+        this.currentIsFollowed = true;
+      } else {
+        await this.$accessor.unfollowUser(this.author);
+        this.currentIsFollowed = false;
+      }
+    },
   },
 });
 </script>
+<style scoped>
+.active {
+  @apply text-white bg-gray-600;
+}
+
+.active:hover {
+  @apply bg-gray-700;
+}
+</style>

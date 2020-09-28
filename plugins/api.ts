@@ -59,7 +59,7 @@ const apiPlugin: Plugin = ({ $config: { apiURL } }, inject) => {
   inject('apiUrl', {
     getArticle: (slug: string) => articleUrl(slug),
     favoriteArticle: (slug: string) => `${articleUrl(slug)}/favorite`,
-    folllowUser: (username: string) => `${profileUrl(username)}/follow`,
+    followUser: (username: string) => `${profileUrl(username)}/follow`,
     getProfile: (username: string) => profileUrl(username),
     getFeed: `${articlesUrl}/feed`,
     queryArticles: (queryObject?: ArticleQueryObject) => {
