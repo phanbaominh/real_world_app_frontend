@@ -1,7 +1,7 @@
 <template>
   <BaseButton
     :class="{ active: currentIsFollowed }"
-    color="gray-600"
+    class="text-gray-600 border-gray-600 hover:bg-gray-600"
     @click="onFollow"
   >
     <FontAwesomeIcon icon="plus" />

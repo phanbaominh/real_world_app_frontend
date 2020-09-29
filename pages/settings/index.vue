@@ -39,7 +39,7 @@
     <BaseButton
       type="button"
       :class="{ active: false }"
-      class="self-start px-2 lg:text-lg"
+      class="self-start px-2 lg:text-lg text-red-500 border-red-500 hover:bg-red-500"
       color="red-500"
       @click="onLogOut"
     >

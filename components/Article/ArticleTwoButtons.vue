@@ -15,10 +15,16 @@
       />
     </div>
     <div v-else>
-      <BaseButton color="gray-600" class="mr-2" @click="onEditArticle">
+      <BaseButton
+        class="mr-2 text-gray-600 border-gray-600 hover:bg-gray-600"
+        @click="onEditArticle"
+      >
         <FontAwesomeIcon icon="edit" /> Edit Article
       </BaseButton>
-      <BaseButton color="red-500" @click="onDeleteArticle">
+      <BaseButton
+        class="text-red-500 border-red-500 hover:bg-red-500"
+        @click="onDeleteArticle"
+      >
         <FontAwesomeIcon icon="trash" /> Delete Article
       </BaseButton>
     </div>
