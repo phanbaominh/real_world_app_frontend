@@ -1,40 +1,59 @@
 <template>
-  <header class="flex justify-between py-2">
-    <div class="flex-grow text-center">
-      <h1 class="text-conduit-green text-xl xl:text-3xl">conduit</h1>
+  <header class="flex justify-around sm:justify-between px-4 sm:px-2 py-2">
+    <transition name="slide-fade">
+      <TheHeaderNav
+        v-if="isHamburgerActivated"
+        class="hamburger-menu"
+        @click.native="isHamburgerActivated = false"
+      />
+    </transition>
+    <div class="flex-grow self-start sm:text-center">
+      <h1 class="text-conduit-green text-xl md:text-2xl xl:text-3xl">
+        conduit
+      </h1>
     </div>
-    <nav class="flex-grow flex justify-center self-center">
-      <HeaderButton link="/">Home</HeaderButton>
-      <template v-if="!$auth.user">
-        <HeaderButton link="/login">Sign in</HeaderButton>
-        <HeaderButton link="/signup">Sign up</HeaderButton>
-      </template>
-      <template v-else>
-        <HeaderButton link="/editor">
-          <FontAwesomeIcon icon="edit" /> New Article
-        </HeaderButton>
-        <HeaderButton link="/settings">
-          <BaseButtonSettings class="focus:outline-none" />
-        </HeaderButton>
-        <HeaderButton :link="`/@${$auth.user.username}`">{{
-          $auth.user.username
-        }}</HeaderButton>
-      </template>
-    </nav>
+    <TheHeaderNav
+      class="self-center hidden sm:flex sm:flex-grow sm:justify-center"
+    />
+    <div class="block sm:hidden">
+      <FontAwesomeIcon icon="bars" @click="onHamburger" />
+    </div>
   </header>
 </template>
 <script lang="ts">
 import Vue from 'vue';
-import HeaderButton from './TheHeaderButton.vue';
 export default Vue.extend({
-  components: {
-    HeaderButton,
+  data() {
+    return { isHamburgerActivated: false };
   },
   methods: {
     async logOut(e: Event) {
       e.preventDefault();
       await this.$auth.logout();
     },
+    onHamburger() {
+      this.isHamburgerActivated = !this.isHamburgerActivated;
+    },
   },
 });
 </script>
+<style>
+.hamburger-menu {
+  position: absolute;
+  top: 2.5rem;
+  z-index: 1000;
+  @apply bg-white w-full justify-between px-2 py-1 shadow-md flex;
+}
+
+.slide-fade-enter-active {
+  transition: all 0.1s linear;
+}
+.slide-fade-leave-active {
+  transition: all 0.1s linear;
+}
+.slide-fade-enter, .slide-fade-leave-to
+/* .slide-fade-leave-active below version 2.1.8 */ {
+  transform: translateY(-0.5rem);
+  opacity: 0;
+}
+</style>

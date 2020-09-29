@@ -72,7 +72,15 @@ export default {
    */
   fontawesome: {
     icons: {
-      solid: ['faHeart', 'faPlus', 'faCog', 'faEdit', 'faTrash'],
+      solid: [
+        'faHeart',
+        'faPlus',
+        'faCog',
+        'faEdit',
+        'faTrash',
+        'faBars',
+        'faHome',
+      ],
     },
   },
   build: {},

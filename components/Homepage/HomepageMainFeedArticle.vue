@@ -26,7 +26,7 @@
         <div
           v-for="tag in article.tagList"
           :key="tag"
-          class="rounded-full px-2 text-lg border-gray-500 opacity-75 border text-gray-500 cursor-pointer mr-2"
+          class="rounded-full px-1 lg:px-2 lg:text-lg border-gray-500 opacity-75 border text-gray-500 cursor-pointer mr-2"
           @click="onSelectTag(tag)"
         >
           {{ tag }}
