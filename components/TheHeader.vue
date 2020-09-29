@@ -37,7 +37,7 @@ export default Vue.extend({
   },
 });
 </script>
-<style>
+<style scoped>
 .hamburger-menu {
   position: absolute;
   top: 2.5rem;

@@ -72,6 +72,8 @@ export default Vue.extend({
       this.$router.push('/login');
     },
   },
-  middleware: 'auth',
+  head: {
+    title: 'Settings',
+  },
 });
 </script>

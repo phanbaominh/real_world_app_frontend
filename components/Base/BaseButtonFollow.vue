@@ -33,6 +33,10 @@ export default Vue.extend({
   },
   methods: {
     async onFollow() {
+      if (!this.$auth.loggedIn) {
+        this.$router.push('/login');
+        return;
+      }
       if (!this.currentIsFollowed) {
         await this.$accessor.followUser(this.author);
         this.currentIsFollowed = true;

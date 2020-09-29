@@ -25,5 +25,9 @@ export default Vue.extend({
   validate({ params }) {
     return /@.+/.test(params.profile);
   },
+  auth: false,
+  head() {
+    return { title: this.$route.params.profile };
+  },
 });
 </script>

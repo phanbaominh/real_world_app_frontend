@@ -13,5 +13,14 @@ export default Vue.extend({
   data() {
     return { article: (null as any) as Article };
   },
+  created() {
+    // If the user is not authenticated
+    if (this.article.author.username !== this.$auth.user.username) {
+      this.$nuxt.error({ statusCode: 401, message: 'Unauthorized' });
+    }
+  },
+  head: {
+    title: 'Edit Article',
+  },
 });
 </script>

@@ -6,7 +6,10 @@
       <img
         alt="User profile picture"
         class="rounded-full w-32 h-32"
-        :src="profile.image"
+        :src="
+          profile.image ||
+          'https://st3.depositphotos.com/1767687/16607/v/450/depositphotos_166074422-stock-illustration-default-avatar-profile-icon-grey.jpg'
+        "
       />
       <h1 class="text-3xl mt-4 font-bold">
         <strong>{{ profile.username }}</strong>

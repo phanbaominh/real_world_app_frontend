@@ -13,7 +13,11 @@
         <template #pending
           ><span class="text-xl">Fetching comments...<LoadingSpinner /></span
         ></template>
-        <CommentSection :comments="comments" :article-slug="article.slug" />
+        <CommentSection
+          v-if="$auth.loggedIn"
+          :comments="comments"
+          :article-slug="article.slug"
+        />
       </BaseFetcher>
     </div>
   </section>
@@ -38,5 +42,11 @@ export default Vue.extend({
       return this.$accessor.currentArticle as Article;
     },
   },
+  head() {
+    return {
+      title: this.$accessor.currentArticle!.title,
+    };
+  },
+  auth: false,
 });
 </script>

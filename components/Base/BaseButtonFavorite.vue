@@ -46,6 +46,10 @@ export default Vue.extend({
   },
   methods: {
     async onFavorite() {
+      if (!this.$auth.loggedIn) {
+        this.$router.push('/login');
+        return;
+      }
       this.hasAlreadyUpdated = false;
       if (!this.currentIsFavorited) {
         await this.$accessor.favoriteArticle(this.articleSlug);

@@ -1,6 +1,8 @@
 <template>
   <div>
-    <div v-if="$auth.user.username !== article.author.username">
+    <div
+      v-if="!$auth.loggedIn || $auth.user.username !== article.author.username"
+    >
       <BaseButtonFollow
         class="mr-2"
         :is-followed="false"
