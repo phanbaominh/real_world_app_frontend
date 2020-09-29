@@ -5,16 +5,16 @@
         v-if="$auth.user"
         :class="{ active: currentTab === 2 }"
         :tab-number="2"
-        >Your Feed</HomepageMainFeedTab
+        ><h1>Your Feed</h1></HomepageMainFeedTab
       >
       <HomepageMainFeedTab :class="{ active: currentTab === 0 }" :tab-number="0"
-        >Global Feed</HomepageMainFeedTab
+        ><h1>Global Feed</h1></HomepageMainFeedTab
       ><HomepageMainFeedTab
         v-if="selectedTag"
         :class="{ active: currentTab === 1 }"
         :tab-number="1"
       >
-        {{ selectedTag }}
+        <h1>{{ selectedTag }}</h1>
       </HomepageMainFeedTab>
     </div>
   </header>

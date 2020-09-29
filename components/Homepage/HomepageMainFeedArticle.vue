@@ -10,15 +10,17 @@
       />
     </div>
     <nuxt-link :to="`/article/${article.slug}`">
-      <h2 class="text-2xl lg:text-3xl font-bold">{{ article.title }}</h2>
+      <h2 class="text-xl sm:text-2xl lg:text-3xl font-bold">
+        {{ article.title }}
+      </h2>
     </nuxt-link>
-    <p class="text-lg lg:text-xl text-gray-600 opacity-75 mb-4">
+    <p class="sm:text-lg lg:text-xl text-gray-600 opacity-75 mb-4">
       {{ article.description }}
     </p>
     <div class="flex">
       <nuxt-link
         :to="`/article/${article.slug}`"
-        class="text-gray-500 opacity-75 text-sm lg:text-base"
+        class="text-gray-500 opacity-75 text-xs hover:underline sm:text-base"
       >
         Read more...
       </nuxt-link>
@@ -26,7 +28,7 @@
         <div
           v-for="tag in article.tagList"
           :key="tag"
-          class="rounded-full px-1 lg:px-2 lg:text-lg border-gray-500 opacity-75 border text-gray-500 cursor-pointer mr-2"
+          class="rounded-full px-2 text-sm sm:text-lg border-gray-500 opacity-75 border text-gray-500 cursor-pointer mr-2"
           @click="onSelectTag(tag)"
         >
           {{ tag }}

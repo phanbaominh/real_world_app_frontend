@@ -6,7 +6,7 @@
       <button
         v-for="i in pageCount"
         :key="i"
-        class="text-green-500 border-green-400 border-2 px-4 py-2 mr-1 rounded hover:text-white hover:bg-green-500"
+        class="text-green-500 border-green-400 border-2 px-2 py-1 sm:px-4 sm:py-2 mr-1 rounded hover:text-white hover:bg-green-500"
         @click="changePage($event, i)"
       >
         {{ i }}

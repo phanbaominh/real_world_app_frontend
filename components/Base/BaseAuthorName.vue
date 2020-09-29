@@ -1,7 +1,7 @@
 <template>
   <nuxt-link
     :to="`/@${username}`"
-    class="text-green-500 text-xl hover:underline"
+    class="text-green-500 sm:text-xl hover:underline"
   >
     {{ username }}
   </nuxt-link>

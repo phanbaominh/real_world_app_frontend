@@ -1,5 +1,6 @@
 <template>
   <AuthBaseForm :initial-error="error" @submit="onSubmit">
+    <template #heading>Article Form</template>
     <AuthBaseFormInput
       v-model="article.title"
       type="text"

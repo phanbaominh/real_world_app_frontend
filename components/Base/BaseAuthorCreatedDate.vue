@@ -1,5 +1,5 @@
 <template>
-  <time class="block text-gray-600 opacity-75">
+  <time class="block text-gray-600 opacity-75 text-sm sm:text-base">
     {{ $formatDate(createdAt) }}
   </time>
 </template>
