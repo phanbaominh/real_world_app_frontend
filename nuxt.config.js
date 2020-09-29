@@ -85,7 +85,7 @@ export default {
   },
   build: {},
   server: {
-    port: 8000,
+    port: process.env.PORT || 8000,
   },
   loading: {
     color: 'green',
@@ -110,10 +110,7 @@ export default {
             propertyName: 'user',
           },
         },
-        // tokenRequired: true,
-        // tokenType: 'bearer',
         globalToken: false,
-        // autoFetchUser: true
       },
     },
   },
