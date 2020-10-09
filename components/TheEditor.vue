@@ -1,13 +1,13 @@
 <template>
-  <AuthBaseForm :initial-error="error" @submit="onSubmit">
+  <BaseForm :initial-error="error" @submit="onSubmit">
     <template #heading>Article Form</template>
-    <AuthBaseFormInput
+    <BaseFormInput
       v-model="article.title"
       type="text"
       label="Article Title"
       name="title"
     />
-    <AuthBaseFormInput
+    <BaseFormInput
       v-model="article.description"
       type="text"
       label="What's this article about?"
@@ -20,7 +20,7 @@
       placeholder="Write your article"
       name="body"
     />
-    <AuthBaseFormInput
+    <BaseFormInput
       v-model="tagList"
       type="text"
       label="Enter tags"
@@ -30,7 +30,7 @@
     <BaseButtonSolid type="submit" class="lg:px-4 self-end">
       Publish Article
     </BaseButtonSolid>
-  </AuthBaseForm>
+  </BaseForm>
 </template>
 <script lang="ts">
 import Vue, { PropOptions } from 'vue';

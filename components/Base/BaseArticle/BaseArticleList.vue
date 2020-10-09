@@ -12,7 +12,7 @@
       >
         <template #default="slotProps">
           <div class="mb-12">
-            <HomepageMainFeedArticles :articles="slotProps.items" />
+            <BaseArticles :articles="slotProps.items" />
           </div>
         </template>
         <template #empty>

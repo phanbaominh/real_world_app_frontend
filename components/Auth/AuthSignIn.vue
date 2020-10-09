@@ -1,13 +1,13 @@
 <template>
-  <AuthBaseForm :initial-error="error" @submit="onSignIn">
+  <BaseForm :initial-error="error" @submit="onSignIn">
     <template #heading>Sign in</template>
-    <AuthBaseFormInput
+    <BaseFormInput
       v-model="user.email"
       :label="'Email'"
       name="email"
       type="text"
     />
-    <AuthBaseFormInput
+    <BaseFormInput
       v-model="user.password"
       :label="'Password'"
       name="password"
@@ -16,7 +16,7 @@
     <BaseButtonSolid type="submit" class="px-4 self-end">
       Sign in
     </BaseButtonSolid>
-  </AuthBaseForm>
+  </BaseForm>
 </template>
 <script lang="ts">
 import Vue from 'vue';

@@ -1,6 +1,6 @@
 <template>
   <div>
-    <HomepageMainFeedArticle
+    <BaseArticle
       v-for="(article, index) in articles"
       :key="article.slug"
       :article="article"

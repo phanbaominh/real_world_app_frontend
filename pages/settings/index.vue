@@ -1,13 +1,13 @@
 <template>
-  <AuthBaseForm :initial-error="error" @submit="onSubmit">
+  <BaseForm :initial-error="error" @submit="onSubmit">
     <template #heading>Your Settings</template>
-    <AuthBaseFormInput
+    <BaseFormInput
       v-model="user.image"
       label="Url of profile picture"
       name="image"
       type="text"
     />
-    <AuthBaseFormInput
+    <BaseFormInput
       v-model="user.username"
       label="Username"
       name="username"
@@ -20,13 +20,13 @@
       class="border-gray-400 p-2 border rounded-lg"
       name="bio"
     />
-    <AuthBaseFormInput
+    <BaseFormInput
       v-model="user.email"
       label="Email"
       name="email"
       type="text"
     />
-    <AuthBaseFormInput
+    <BaseFormInput
       v-model="user.password"
       label="New password"
       name="password"
@@ -45,7 +45,7 @@
     >
       Logout
     </BaseButton>
-  </AuthBaseForm>
+  </BaseForm>
 </template>
 <script lang="ts">
 import Vue from 'vue';

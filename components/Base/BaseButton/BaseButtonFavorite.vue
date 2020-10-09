@@ -1,5 +1,8 @@
 <template>
-  <BaseButton :class="{ active: currentIsFavorited }" @click="onFavorite"
+  <BaseButton
+    :class="{ active: currentIsFavorited }"
+    class="text-conduit-green border-conduit-green hover:bg-conduit-green"
+    @click="onFavorite"
     ><FontAwesomeIcon icon="heart" />
     <span v-if="hasText">{{
       !currentIsFavorited ? 'Favorite article' : 'Unfavorite article'
