@@ -1,5 +1,5 @@
 # real_world_app_frontend
-
+Deployed site: https://conduit-pbminh.herokuapp.com/
 ## Build Setup
 
 ```bash
@@ -17,4 +17,3 @@ $ yarn start
 $ yarn generate
 ```
 
-For detailed explanation on how things work, check out [Nuxt.js docs](https://nuxtjs.org).
